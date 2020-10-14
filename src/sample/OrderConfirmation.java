@@ -70,13 +70,13 @@ public class OrderConfirmation extends Application{
             Button btnSend = new Button("Send");
             Text emailSent = new Text();
 
-            Image imagePaymentSuccess = new Image("file:/Users/jannismuller/IdeaProjects/TicketBookingSystem/src/sample/success2.gif");
+            Image imagePaymentSuccess = new Image("file:src/sample/success2.gif");
             ImageView imageViewPaymentSuccess = new ImageView(imagePaymentSuccess);
             imageViewPaymentSuccess.setPreserveRatio(true);
             imageViewPaymentSuccess.setFitHeight(20);
             imageViewPaymentSuccess.setFitWidth(20);
 
-            Image imageSF = new Image("file:/Users/jannismuller/IdeaProjects/TicketBookingSystem/src/sample/sflogo.png");
+            Image imageSF = new Image("file:src/sample/sflogo.png");
             ImageView imageViewSF = new ImageView(imageSF);
             imageViewSF.setPreserveRatio(true);
             imageViewSF.setFitHeight(120);

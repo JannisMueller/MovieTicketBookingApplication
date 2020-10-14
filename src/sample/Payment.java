@@ -55,7 +55,7 @@ public class Payment extends Application {
         Text tInfo = new Text("©CinemaTix AB, 23143 Jönköping");
         tInfo.setStyle("-fx-font-size: 60%");
 
-        Image imageCC = new Image("file:/Users/jannismuller/IdeaProjects/TicketBookingSystem/src/sample/visacard.png");
+        Image imageCC = new Image("file:src/sample/visacard.png");
         ImageView imageViewCC = new ImageView(imageCC);
         imageViewCC.setPreserveRatio(true);
         imageViewCC.setFitHeight(150);
