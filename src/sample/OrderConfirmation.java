@@ -21,16 +21,14 @@ public class OrderConfirmation extends Application {
     @Override
     public void start(Stage stage5) {
 
-        String loggedInUser = LogInPage.tfEmail.getText();
-
-        try (Connection conn = DriverManager.getConnection(Main.CONNECTION_STRING);
+        try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
              Statement statement = conn.createStatement()) {
-            ResultSet result= statement.executeQuery("SELECT * FROM " + Main.TABLE_CUSTOMER + " WHERE " + Main.COLUMN_EMAIL + "='" + LogInPage.tfEmail.getText() + "'");
+            ResultSet result= statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_EMAIL + "='" + LogInPage.tfEmail.getText() + "'");
 
-            String firstName = result.getString(Main.COLUMN_FIRSTNAME);
-            String lastName = result.getString(Main.COLUMN_LASTNAME);
-            String email = result.getString(Main.COLUMN_EMAIL);
-            String phone = result.getString(Main.COLUMN_PHONE);
+            String firstName = result.getString(Datasource.COLUMN_FIRSTNAME);
+            String lastName = result.getString(Datasource.COLUMN_LASTNAME);
+            String email = result.getString(Datasource.COLUMN_EMAIL);
+            String phone = result.getString(Datasource.COLUMN_PHONE);
 
 
             Text bookingInformation = new Text("Booking Details");

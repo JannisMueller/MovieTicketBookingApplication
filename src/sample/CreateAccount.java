@@ -88,15 +88,16 @@ public class CreateAccount extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                try (Connection conn = DriverManager.getConnection(Main.CONNECTION_STRING);
+                try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
                      Statement statement = conn.createStatement()) {
+
                     String firstname = tfFirstName.getText();
                     String lastname = tfLastName.getText();
                     String email = tfEmail.getText();
                     String phone = tfPhone.getText();
                     String password = pfPassword.getText();
 
-                    Main.createCustomer(statement, firstname, lastname, email, phone, password);
+                    Datasource.createCustomer(statement, firstname, lastname, email, phone, password);
 
                 } catch (
                         SQLException e) {
