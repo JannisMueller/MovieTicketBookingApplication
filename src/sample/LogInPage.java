@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +15,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LogInPage extends Application {
+
+    public static TextField tfEmail = new TextField();
 
     @Override
     public void start(Stage stage2) {
@@ -24,11 +27,10 @@ public class LogInPage extends Application {
 
         Text notACustomer = new Text("Not a customer yet? Register now!");
 
-        TextField tfEmail = new TextField();
         tfEmail.setPromptText("E-Mail");
 
-        TextField tfPassword = new TextField();
-        tfPassword.setPromptText("Password");
+        PasswordField pfPassword = new PasswordField();
+        pfPassword.setPromptText("Password");
 
         Button bntLogIn = new Button("Sign In");
         Button bntCreateAccount = new Button("Create Account");
@@ -48,7 +50,7 @@ public class LogInPage extends Application {
         gridPane2.add(txtLogin,1,3);
         gridPane2.add(imageViewSF,3,1);
         gridPane2.add(tfEmail,1,4);
-        gridPane2.add(tfPassword,2,4);
+        gridPane2.add(pfPassword,2,4);
         gridPane2.add(bntLogIn,1,6);
         gridPane2.add(notACustomer,1, 12,2,1);
         gridPane2.add(bntCreateAccount,1,13);
@@ -69,6 +71,9 @@ public class LogInPage extends Application {
         bntLogIn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
+                OrderConfirmation stage = new OrderConfirmation();
+                stage.start(stage2);
 
 
 

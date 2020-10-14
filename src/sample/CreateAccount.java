@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -22,6 +19,7 @@ import java.sql.Statement;
 
 
 public class CreateAccount extends Application {
+
     public void start(Stage stage) {
 
         Text tHeader = new Text("Create account");
@@ -83,6 +81,8 @@ public class CreateAccount extends Application {
         gridPane.add(btnCreateAccount, 1, 6);
         gridPane.add(btnBack, 0, 6);
 
+
+
         btnCreateAccount.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -104,9 +104,18 @@ public class CreateAccount extends Application {
                     e.printStackTrace();
                 }
 
+
+                Alert alertAccountCreated = new Alert(Alert.AlertType.INFORMATION);
+                alertAccountCreated.setTitle("Information Dialog");
+                alertAccountCreated.setHeaderText("Account created!");
+                alertAccountCreated.setContentText("Log in with your details on next page");
+                alertAccountCreated.showAndWait();
+
+                LogInPage logInPageStage = new LogInPage();
+                logInPageStage.start(stage);
+
             }
         });
-
 
         Scene scene2 = new Scene(gridPane, 400, 400);
         stage.setScene(scene2);
