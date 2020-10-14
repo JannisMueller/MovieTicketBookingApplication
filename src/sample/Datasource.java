@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Datasource {
-
     public static final String DB_NAME = "customer.db";
     public static final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
     public static final String TABLE_CUSTOMER = "customer";
@@ -16,6 +15,8 @@ public class Datasource {
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PHONE = "phone";
     public static final String COLUMN_PASSWORD = "password";
+
+
 
     public static void createCustomerDatabase() {
         try (Connection conn = DriverManager.getConnection(CONNECTION_STRING);

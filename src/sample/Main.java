@@ -16,15 +16,12 @@ public class Main extends Application {
 
     }
 
-
-
      @Override
     public void start(Stage stage) throws Exception {
 
         SelectMovie selectMovieStage = new SelectMovie();
         selectMovieStage.start(stage);
         stage.show();
+
     }
-
-
 }
