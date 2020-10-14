@@ -41,7 +41,7 @@ public class Datasource {
              Statement statement = conn.createStatement()) {
 
             statement.execute("CREATE TABLE IF NOT EXISTS " + Datasource.TABLE_BOOKINGS +
-                    " (" + COLUMN_BOOKING_ID+ " text, " +
+                    " (" + COLUMN_BOOKING_ID + " text, " +
                     COLUMN_MOVIE + " text, " +
                     COLUMN_DATEMOVIE + " text, " +
                     COLUMN_NUMBER_TICKETS + " text, " +
@@ -60,13 +60,13 @@ public class Datasource {
     public static void createBooking(Statement statement, String bookingId, String movie, String date, String numberTickets, String seats, String totalPrice) throws SQLException {
 
         statement.execute("INSERT INTO " + TABLE_BOOKINGS +
-                " (" + COLUMN_BOOKING_ID+ " text, " +
-                COLUMN_MOVIE + " text, " +
-                COLUMN_DATEMOVIE + " text, " +
-                COLUMN_NUMBER_TICKETS + " text, " +
-                COLUMN_SEATS+ " text, " +
-                COLUMN_TOTAL_PRICE+ " text" +
-                ")" +
+                " (" + COLUMN_BOOKING_ID+ ", " +
+                COLUMN_MOVIE + ", " +
+                COLUMN_DATEMOVIE + ", " +
+                COLUMN_NUMBER_TICKETS + ", " +
+                COLUMN_SEATS+ " , " +
+                COLUMN_TOTAL_PRICE +
+                " ) " +
                 "VALUES('" + bookingId + "', '" + movie + "', '" + date + "', '" + numberTickets + "', '" + seats + "', '" + totalPrice + "')");
     }
 
@@ -92,7 +92,6 @@ public class Datasource {
             e.printStackTrace();
         }
     }
-
     public static void createCustomer(Statement statement, String firstname, String lastname, String email, String phone, String password) throws SQLException {
 
         statement.execute("INSERT INTO " + TABLE_CUSTOMER +
