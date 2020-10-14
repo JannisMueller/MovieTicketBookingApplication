@@ -75,8 +75,6 @@ public class LogInPage extends Application {
                 OrderConfirmation stage = new OrderConfirmation();
                 stage.start(stage2);
 
-
-
             }
         });
 

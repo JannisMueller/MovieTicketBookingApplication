@@ -19,9 +19,19 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Random;
+
 public class SelectMovie extends Application {
 
     public void start(Stage stage) {
+
+        int max = 1000;
+        int min = 1999;
+        int range = max - min + 1;
 
         // Header text
         Text tHeader = new Text("Get Tickets");
@@ -68,7 +78,6 @@ public class SelectMovie extends Application {
         imageViewSF.setFitHeight(120);
         imageViewSF.setFitWidth(120);
 
-
         // Creating gridpane
         GridPane gridPane1 = new GridPane();
 
@@ -95,12 +104,38 @@ public class SelectMovie extends Application {
         stage.show();
 
 
-        btNext.setOnAction(actionEvent -> {
-            stage.close();
-            LogInPage logInPage = new LogInPage();
-            logInPage.start(stage);
+        btNext.setOnAction(new EventHandler<ActionEvent>() {
 
-        });
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_BOOKING_STRING);
+                     Statement statement = conn.createStatement()) {
+
+                    String bookingId = String.valueOf(Math.random() * range + min);
+                    String movie = (String) cbMovie.getValue();
+                    String date = String.valueOf(datePicker.getValue());
+                    String numberTickets = (String) cbTickets.getValue();
+                    String seats = "Row 9, Seat 19-20";
+                    String totalPrice = "30";
+
+                    Datasource.createBooking(statement, bookingId, movie, date, numberTickets, seats, totalPrice);
+
+
+                } catch (
+                        SQLException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                    e.printStackTrace();
+                }
+
+
+                stage.close();
+                LogInPage logInPage = new LogInPage();
+                logInPage.start(stage);
+
+            }});
+
+
 
     }
 }

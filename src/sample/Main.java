@@ -3,7 +3,6 @@ package sample;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.sql.*;
 
 public class Main extends Application {
 
@@ -11,12 +10,11 @@ public class Main extends Application {
 
         // Set up database if it does not exist
         Datasource.createCustomerDatabase();
+        Datasource.createBookingsDatabase();
+
 
         launch(args);
-
     }
-
-
 
      @Override
     public void start(Stage stage) throws Exception {
