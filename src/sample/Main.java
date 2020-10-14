@@ -12,6 +12,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Main extends Application {
+    static final String DB_NAME = "customer.db";
+    static final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
+    static final String TABLE_CUSTOMER = "customer";
+
+    public static final String COLUMN_FIRSTNAME = "firstname";
+    public static final String COLUMN_LASTNAME = "lastname";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_PHONE = "phone";
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -23,14 +31,7 @@ public class Main extends Application {
     
     public static void main(String[] args) {
 
-        final String DB_NAME = "customer.db";
-        final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
-        final String TABLE_CUSTOMER = "customer";
 
-        final String COLUMN_FIRSTNAME = "firstname";
-        final String COLUMN_LASTNAME = "lastname";
-        final String COLUMN_EMAIL = "email";
-        final String COLUMN_PHONE = "phone";
 
         try (Connection conn = DriverManager.getConnection(CONNECTION_STRING);
 
@@ -50,5 +51,18 @@ public class Main extends Application {
         }
 
         launch(args);
+
+
     }
+    public static void createCustomer(Statement statement, String firstname, String lastname, String email, String phone) throws SQLException {
+        statement.execute("INSERT INTO " + TABLE_CUSTOMER +
+                " (" + COLUMN_FIRSTNAME + ", " +
+                COLUMN_LASTNAME + ", " +
+                COLUMN_EMAIL + ", " +
+                COLUMN_PHONE +
+                " ) " +
+                "VALUES('" + firstname + "', " + lastname + ", '" + email + ", '" + phone + "')");
+    }
+
+
 }
