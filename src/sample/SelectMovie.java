@@ -5,13 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -61,46 +62,45 @@ public class SelectMovie extends Application {
         // Next button
         Button btNext = new Button("Next");
 
+        Image imageSF = new Image("file:src/sample/logoCompany.jpg");
+        ImageView imageViewSF = new ImageView(imageSF);
+        imageViewSF.setPreserveRatio(true);
+        imageViewSF.setFitHeight(120);
+        imageViewSF.setFitWidth(120);
+
 
         // Creating gridpane
         GridPane gridPane1 = new GridPane();
 
         // Formatting gridpane
-        gridPane1.setMinSize(300,400);
-        //gridPane1.setPadding(new Insets(10,10,10,10));
         gridPane1.setVgap(10);
         gridPane1.setHgap(10);
-        gridPane1.setAlignment(Pos.CENTER);
+        gridPane1.setAlignment(Pos.TOP_CENTER);
 
         // Creating grid-pane layout
-        gridPane1.add(tHeader,1,0);
-        gridPane1.add(separator1,1,1);
-        gridPane1.add(datePicker,1,2);
-        gridPane1.add(tDatePicker,0,2);
-        gridPane1.add(tMovie,0,3);
-        gridPane1.add(cbMovie,1,3);
-        gridPane1.add(tSeats, 0,4);
-        gridPane1.add(cbTickets,1,4);
-        gridPane1.add(btNext,1,5);
+        gridPane1.add(tHeader,1,4);
+        gridPane1.add(separator1,1,5);
+        gridPane1.add(datePicker,1,6);
+        gridPane1.add(tDatePicker,0,6);
+        gridPane1.add(tMovie,0,7);
+        gridPane1.add(cbMovie,1,7);
+        gridPane1.add(tSeats, 0,8);
+        gridPane1.add(cbTickets,1,8);
+        gridPane1.add(btNext,1,9);
+        gridPane1.add(imageViewSF,3,1);
 
         // Creating stage etc
-        Scene scene1 = new Scene(gridPane1, 400,400);
+        Scene scene1 = new Scene(gridPane1, 400,500);
         stage.setScene(scene1);
         stage.show();
 
 
         btNext.setOnAction(actionEvent -> {
-
-            UserDetails userDetailsStage = new UserDetails();
-            userDetailsStage.start(stage);
+            stage.close();
+            LogInPage logInPage = new LogInPage();
+            logInPage.start(stage);
 
         });
 
-        btNext.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-            }
-        });
     }
 }

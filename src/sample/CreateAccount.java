@@ -104,9 +104,6 @@ public class CreateAccount extends Application {
                     e.printStackTrace();
                 }
 
-
-
-
             }
         });
 

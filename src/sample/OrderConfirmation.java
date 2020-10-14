@@ -30,6 +30,7 @@ public class OrderConfirmation extends Application{
 
             Label nameFilm = new Label("Movie");
             nameFilm.setStyle("-fx-font-weight: bold");
+            //String chosenMovie = T
             Text txtnameFilm = new Text("Tennet");
 
 
@@ -76,11 +77,11 @@ public class OrderConfirmation extends Application{
             imageViewPaymentSuccess.setFitHeight(20);
             imageViewPaymentSuccess.setFitWidth(20);
 
-            Image imageSF = new Image("file:src/sample/sflogo.png");
+            Image imageSF = new Image("file:src/sample/logoCompany.jpg");
             ImageView imageViewSF = new ImageView(imageSF);
             imageViewSF.setPreserveRatio(true);
             imageViewSF.setFitHeight(120);
-            imageViewSF.setFitWidth(160);
+            imageViewSF.setFitWidth(120);
 
 
 
@@ -127,11 +128,10 @@ public class OrderConfirmation extends Application{
 
             gridPane5.add(imageViewPaymentSuccess,2,5);
 
-            gridPane5.add(imageViewSF,2,1);
-
+            gridPane5.add(imageViewSF,3,1);
 
             stage5.setTitle("Thank you for Order!");
-            Scene scene5 = new Scene(gridPane5, 500, 600);
+            Scene scene5 = new Scene(gridPane5, 500, 650);
             stage5.setScene(scene5);
             stage5.show();
 
