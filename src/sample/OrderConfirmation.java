@@ -23,7 +23,7 @@ public class OrderConfirmation extends Application {
 
         try (Connection conn = DriverManager.getConnection(Main.CONNECTION_STRING);
              Statement statement = conn.createStatement()) {
-            ResultSet result= statement.executeQuery("SELECT * FROM " + Main.TABLE_CUSTOMER + " WHERE " + Main.COLUMN_LASTNAME + "='Mueller'");
+            ResultSet result= statement.executeQuery("SELECT * FROM " + Main.TABLE_CUSTOMER + " WHERE " + Main.COLUMN_EMAIL + "='Mueller'");
 
             String firstName = result.getString(Main.COLUMN_FIRSTNAME);
             String lastName = result.getString(Main.COLUMN_LASTNAME);
@@ -44,7 +44,6 @@ public class OrderConfirmation extends Application {
             nameFilm.setStyle("-fx-font-weight: bold");
 
             Text txtnameFilm = new Text("Tennet");
-
 
             Label date = new Label("Date");
             date.setStyle("-fx-font-weight: bold");
@@ -69,6 +68,10 @@ public class OrderConfirmation extends Application {
             Label emailCustomer = new Label("Email-Address");
             emailCustomer.setStyle("-fx-font-weight: bold");
             Text txtEmailCustomer = new Text(email);
+
+            Label phoneCustomer = new Label("Phone Number");
+            phoneCustomer.setStyle("-fx-font-weight: bold");
+            Text txtPhoneCustomer = new Text(phone);
 
             Text sendAsEmail = new Text("Send tickets to a friend");
 
@@ -126,6 +129,9 @@ public class OrderConfirmation extends Application {
 
             gridPane5.add(emailCustomer, 1, 13);
             gridPane5.add(txtEmailCustomer, 2, 13);
+
+            gridPane5.add(phoneCustomer,1,14);
+            gridPane5.add(txtPhoneCustomer,2,14);
 
             gridPane5.add(info, 1, 5);
             gridPane5.add(info2, 1, 16);
