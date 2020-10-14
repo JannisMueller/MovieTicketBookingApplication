@@ -5,21 +5,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Main extends Application {
-    static final String DB_NAME = "customer.db";
-    static final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
-    static final String TABLE_CUSTOMER = "customer";
+    public static final String DB_NAME = "customer.db";
+    public static final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
+    public static final String TABLE_CUSTOMER = "customer";
 
     public static final String COLUMN_FIRSTNAME = "firstname";
     public static final String COLUMN_LASTNAME = "lastname";
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_PASSWORD = "password";
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -41,7 +41,8 @@ public class Main extends Application {
                     " (" + COLUMN_FIRSTNAME + " text, " +
                     COLUMN_LASTNAME + " text, " +
                     COLUMN_EMAIL + " text, " +
-                    COLUMN_PHONE + " text" +
+                    COLUMN_PHONE + " text, " +
+                    COLUMN_PASSWORD + " text" +
                     ")");
 
         } catch(
@@ -54,14 +55,15 @@ public class Main extends Application {
 
 
     }
-    public static void createCustomer(Statement statement, String firstname, String lastname, String email, String phone) throws SQLException {
+    public static void createCustomer(Statement statement, String firstname, String lastname, String email, String phone, String password) throws SQLException {
         statement.execute("INSERT INTO " + TABLE_CUSTOMER +
                 " (" + COLUMN_FIRSTNAME + ", " +
                 COLUMN_LASTNAME + ", " +
                 COLUMN_EMAIL + ", " +
-                COLUMN_PHONE +
+                COLUMN_PHONE + ", " +
+                COLUMN_PASSWORD +
                 " ) " +
-                "VALUES('" + firstname + "', " + lastname + ", '" + email + ", '" + phone + "')");
+                "VALUES('" + firstname + "', " + lastname + ", '" + email + ", '" + phone + ", '"+ password + "')");
     }
 
 
