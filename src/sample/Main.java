@@ -22,7 +22,6 @@ public class Main extends Application {
         SelectMovie selectMovieStage = new SelectMovie();
         selectMovieStage.start(stage);
         stage.show();
+
     }
-
-
 }
