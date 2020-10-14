@@ -41,9 +41,18 @@ public class Main extends Application {
                     " (" + COLUMN_FIRSTNAME + " text, " +
                     COLUMN_LASTNAME + " text, " +
                     COLUMN_EMAIL + " text, " +
-                    COLUMN_PHONE + " text, " +
+                    COLUMN_PHONE + " integer, " +
                     COLUMN_PASSWORD + " text" +
                     ")");
+
+            String firstname = "Jannis";
+            String lastname = "Muller";
+            String email = "mail@.com";
+            int phone = 12313;
+            String password = "hehe";
+
+
+            createCustomer(statement, firstname, lastname, email, phone, password);
 
         } catch(
                 SQLException e) {
@@ -55,15 +64,16 @@ public class Main extends Application {
 
 
     }
-    public static void createCustomer(Statement statement, String firstname, String lastname, String email, String phone, String password) throws SQLException {
+    private static void createCustomer(Statement statement, String firstname, String lastname, String email, int phone, String password) throws SQLException {
+
         statement.execute("INSERT INTO " + TABLE_CUSTOMER +
-                " (" + COLUMN_FIRSTNAME + ", " +
+                " (" +  COLUMN_FIRSTNAME + ", " +
                 COLUMN_LASTNAME + ", " +
                 COLUMN_EMAIL + ", " +
                 COLUMN_PHONE + ", " +
                 COLUMN_PASSWORD +
                 " ) " +
-                "VALUES('" + firstname + "', " + lastname + ", '" + email + ", '" + phone + ", '"+ password + "')");
+                "VALUES('" + firstname + "', " + lastname + "', " + phone + "', " + email + ", '" + password + "')");
     }
 
 
