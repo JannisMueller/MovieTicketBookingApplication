@@ -7,7 +7,9 @@ import java.sql.Statement;
 
 public class Datasource {
 
+
     // Columns for customer db
+
     public static final String DB_NAME = "customer.db";
     public static final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
     public static final String TABLE_CUSTOMER = "customer";
@@ -17,6 +19,7 @@ public class Datasource {
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PHONE = "phone";
     public static final String COLUMN_PASSWORD = "password";
+
 
     // Columns for booking details db
     public static final String DB_BOOKING_NAME = "bookings.db";
@@ -66,7 +69,6 @@ public class Datasource {
                 ")" +
                 "VALUES('" + bookingId + "', '" + movie + "', '" + date + "', '" + numberTickets + "', '" + seats + "', '" + totalPrice + "')");
     }
-
 
 
     public static void createCustomerDatabase() {
