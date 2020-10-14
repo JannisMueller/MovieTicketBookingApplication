@@ -1,16 +1,12 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 
 public class Main extends Application {
+
     public static final String DB_NAME = "customer.db";
     public static final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
     public static final String TABLE_CUSTOMER = "customer";
@@ -21,18 +17,10 @@ public class Main extends Application {
     public static final String COLUMN_PHONE = "phone";
     public static final String COLUMN_PASSWORD = "password";
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-    }
-    
     public static void main(String[] args) {
 
-
-
+        // Creating connection to database
+        // If table does not exist, creates it
         try (Connection conn = DriverManager.getConnection(CONNECTION_STRING);
 
              Statement statement = conn.createStatement()) {
@@ -45,35 +33,38 @@ public class Main extends Application {
                     COLUMN_PASSWORD + " text" +
                     ")");
 
-            String firstname = "Jannis";
-            String lastname = "Muller";
-            String email = "mail@.com";
-            String phone = "12313";
-            String password = "hehe";
 
 
-            createCustomer(statement, firstname, lastname, email, phone, password);
-
-        } catch(
+        } catch (
                 SQLException e) {
             System.out.println("Something went wrong: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         launch(args);
 
-
     }
-    private static void createCustomer(Statement statement, String firstname, String lastname, String email, String phone, String password) throws SQLException {
+
+    public static void createCustomer(Statement statement, String firstname, String lastname, String email, String phone, String password) throws SQLException {
 
         statement.execute("INSERT INTO " + TABLE_CUSTOMER +
-                " (" +  COLUMN_FIRSTNAME + ", " +
+                " (" + COLUMN_FIRSTNAME + ", " +
                 COLUMN_LASTNAME + ", " +
                 COLUMN_EMAIL + ", " +
                 COLUMN_PHONE + ", " +
                 COLUMN_PASSWORD +
                 " ) " +
-               "VALUES('" + firstname +"', '" + lastname + "', '" + email + "', '" + phone + "' , '" + password + "')");
+                "VALUES('" + firstname + "', '" + lastname + "', '" + email + "', '" + phone + "' , '" + password + "')");
+    }
+
+     @Override
+    public void start(Stage stage) throws Exception {
+
+        SelectMovie selectMovieStage = new SelectMovie();
+        selectMovieStage.start(stage);
+        stage.show();
     }
 
 
