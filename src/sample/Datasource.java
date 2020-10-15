@@ -1,12 +1,9 @@
 package sample;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class Datasource {
-
 
     // Columns for customer db
 
@@ -26,6 +23,7 @@ public class Datasource {
     public static final String CONNECTION_BOOKING_STRING = "jdbc:sqlite:file:src/" + DB_BOOKING_NAME;
     public static final String TABLE_BOOKINGS = "bookings";
 
+    public static final String COLUMN_TIME_BOOKING = "bookingTime";
     public static final String COLUMN_BOOKING_ID = "bookingId";
     public static final String COLUMN_MOVIE = "movie";
     public static final String COLUMN_DATEMOVIE = "dateMovie";
@@ -43,11 +41,13 @@ public class Datasource {
             statement.execute("CREATE TABLE IF NOT EXISTS " + Datasource.TABLE_BOOKINGS +
 
                     " (" + COLUMN_BOOKING_ID + " text, " +
+                    COLUMN_TIME_BOOKING + " text , " +
                     COLUMN_MOVIE + " text, " +
                     COLUMN_DATEMOVIE + " text, " +
                     COLUMN_NUMBER_TICKETS + " text, " +
                     COLUMN_SEATS+ " text, " +
                     COLUMN_TOTAL_PRICE+ " text" +
+
                     ")");
 
         } catch (
@@ -58,16 +58,17 @@ public class Datasource {
             e.printStackTrace();
         }
     }
-    public static void createBooking(Statement statement, String bookingId, String movie, String date, String numberTickets, String seats, String totalPrice) throws SQLException {
+    public static void createBooking(Statement statement, String bookingId, String bookingTime, String movie, String date, String numberTickets, String seats, String totalPrice) throws SQLException {
         statement.execute("INSERT INTO " + TABLE_BOOKINGS +
                 " (" + COLUMN_BOOKING_ID+ ", " +
+                COLUMN_TIME_BOOKING + ", " +
                 COLUMN_MOVIE + ", " +
                 COLUMN_DATEMOVIE + ", " +
                 COLUMN_NUMBER_TICKETS + ", " +
                 COLUMN_SEATS+ " , " +
                 COLUMN_TOTAL_PRICE +
                 " ) " +
-                "VALUES('" + bookingId + "', '" + movie + "', '" + date + "', '" + numberTickets + "', '" + seats + "', '" + totalPrice + "')");
+                "VALUES('" + bookingId + "', '"+  bookingTime + "', '" +  movie + "', '" + date + "', '" + numberTickets + "', '" + seats + "', '" + totalPrice + "')");
     }
 
 

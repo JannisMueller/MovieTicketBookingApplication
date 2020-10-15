@@ -26,8 +26,8 @@ public class OrderConfirmation extends Application {
                         "WHERE " + Datasource.COLUMN_EMAIL + " = ? ";
 
         String sql2 = "SELECT * FROM " + Datasource.TABLE_BOOKINGS+ " " +
-                    "ORDER BY " + Datasource.COLUMN_BOOKING_ID + " " +
-                    " ASC LIMIT 1";
+                    "ORDER BY " + Datasource.COLUMN_TIME_BOOKING+ " " +
+                    " DESC LIMIT 1";
 
         String passedInUserName = LogInPage.tfEmail.getText();
 
@@ -66,7 +66,6 @@ public class OrderConfirmation extends Application {
             String resultNumberTickets = result.getString(Datasource.COLUMN_NUMBER_TICKETS);
             String resultSeats = result.getString(Datasource.COLUMN_SEATS);
             String resultTotalPrice= result.getString(Datasource.COLUMN_TOTAL_PRICE);
-
 
 
             Text bookingInformation = new Text("Booking Details");

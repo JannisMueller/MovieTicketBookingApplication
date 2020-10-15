@@ -19,19 +19,20 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 public class SelectMovie extends Application {
 
     public void start(Stage stage) {
 
-        int max = 1999;
-        int min = 1000;
-        int range = max - min + 1;
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date time =  new Date(System.currentTimeMillis());
+        String bookingTime = formatter.format(time);
+
+
+
 
         // Header text
         Text tHeader = new Text("Get Tickets");
@@ -115,14 +116,14 @@ public class SelectMovie extends Application {
 
                     int index = 0;
 
-                    String bookingId = String.valueOf(index+1);
+                    String bookingId = String.valueOf("RX-" + (int) (1 + Math.random() * 9999));
                     String movie = (String) cbMovie.getValue();
                     String date = String.valueOf(datePicker.getValue());
                     String numberTickets = (String) cbTickets.getValue();
                     String seats = "Row 9, Seat 19-20";
                     String totalPrice = "30";
 
-                    Datasource.createBooking(statement, bookingId, movie, date, numberTickets, seats, totalPrice);
+                    Datasource.createBooking(statement, bookingId, bookingTime, movie, date, numberTickets, seats, totalPrice);
 
                 } catch (
                         SQLException e) {
