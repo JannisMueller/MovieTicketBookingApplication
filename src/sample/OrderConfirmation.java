@@ -21,6 +21,7 @@ public class OrderConfirmation extends Application {
     @Override
     public void start(Stage stage5) {
 
+        //define sql string
         String sql =     "SELECT * FROM " + Datasource.TABLE_CUSTOMER + " " +
                         "WHERE " + Datasource.COLUMN_EMAIL + " = ? ";
 
