@@ -46,7 +46,6 @@ public class Payment extends Application {
         CheckBox terms = new CheckBox(" I accept the Terms & Conditions");
         CheckBox saveCCInfo = new CheckBox("Save your credit card for faster checkout");
 
-
         Label lbCreditCardNumber = new Label("Credit Card Number");
         Label lbValid = new Label("Valid Thru");
         Label lbCVV = new Label("CVV");
@@ -54,19 +53,22 @@ public class Payment extends Application {
         Text tInfo = new Text("©CinemaTix AB, 23143 Jönköping");
         tInfo.setId("footer");
 
+
+        // Logo
         Image imageCC = new Image("file:src/sample/visacard.png");
         ImageView imageViewCC = new ImageView(imageCC);
         imageViewCC.setPreserveRatio(true);
         imageViewCC.setFitHeight(150);
         imageViewCC.setFitWidth(158);
 
+        // Creating and formatting gridpane
         GridPane gridPane4 = new GridPane();
         gridPane4.setVgap(10);
         gridPane4.setHgap(10);
         gridPane4.setAlignment(Pos.CENTER);
 
+        // Adding objects to gridpane
         gridPane4.add(imageViewCC, 1, 0);
-
 
         gridPane4.add(cbPaymentOptions, 1, 1);
 
@@ -88,23 +90,24 @@ public class Payment extends Application {
 
         gridPane4.add(tInfo, 0, 13);
 
-
+        // Creating stage etc
         stage4.setTitle("Payment");
         Scene scene4 = new Scene(gridPane4, 400, 400);
         scene4.getStylesheets().add("sample/stylesheet.css");
         stage4.setScene(scene4);
         stage4.show();
 
-
+        // Button -> Back to Select Movie
         btnCancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //TO STAGE BEFORE PAYMENT
+                SelectMovie stage = new SelectMovie();
+                stage.start(stage4);
 
             }
         });
 
-
+        // Button -> Go to Order Confirmation
         btnConfirm.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -113,16 +116,10 @@ public class Payment extends Application {
                     OrderConfirmation stage5 = new OrderConfirmation();
                     stage5.start(stage4);
 
-
                 } else {
                     terms.setStyle("-fx-text-fill: red");
-
                 }
-
-
             }
         });
-
-
     }
 }

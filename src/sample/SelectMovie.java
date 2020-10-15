@@ -28,9 +28,6 @@ public class SelectMovie extends Application {
         Date time =  new Date(System.currentTimeMillis());
         String bookingTime = formatter.format(time);
 
-
-
-
         // Header text
         Text tHeader = new Text("Get Tickets");
         tHeader.setId("header-text");

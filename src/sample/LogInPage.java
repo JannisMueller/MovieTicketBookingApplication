@@ -24,6 +24,7 @@ public class LogInPage extends Application {
     @Override
     public void start(Stage stage2) {
 
+        // Header
         Text txtLogin = new Text("Sign In");
         txtLogin.setId("header-text");
 
@@ -31,30 +32,32 @@ public class LogInPage extends Application {
 
         tfEmail.setPromptText("E-Mail");
 
+        // Password
         PasswordField pfPassword = new PasswordField();
         pfPassword.setPromptText("Password");
 
+        // Buttons
         Button bntLogIn = new Button("Sign In");
         Button bntCreateAccount = new Button("Create Account");
-
+        // Button -> Errortext
         Label lblErrorSignIn = new Label("Incorrect details, please try again");
         lblErrorSignIn.setVisible(false);
 
+        // Logo
         Image imageSF = new Image("file:src/sample/logoCompany.jpg");
         ImageView imageViewSF = new ImageView(imageSF);
-
         imageViewSF.setPreserveRatio(true);
         imageViewSF.setFitHeight(120);
         imageViewSF.setFitWidth(120);
 
-
+        // Creating and formatting gridpane
         GridPane gridPane2 = new GridPane();
         gridPane2.setVgap(10);
         gridPane2.setHgap(10);
         gridPane2.setAlignment(Pos.CENTER);
 
+        // Adding objects to gridpane
         gridPane2.add(txtLogin, 1, 3, 2, 1);
-//        gridPane2.add(imageViewSF, 3, 1);
         gridPane2.add(tfEmail, 1, 4);
         gridPane2.add(pfPassword, 2, 4);
         gridPane2.add(bntLogIn, 1, 6);
@@ -62,7 +65,7 @@ public class LogInPage extends Application {
         gridPane2.add(notACustomer, 1, 9, 2, 1);
         gridPane2.add(bntCreateAccount, 1, 10);
 
-
+        // Creating scene, etc
         stage2.setTitle("Log-in");
         Scene scene2 = new Scene(gridPane2, 450, 320);
         scene2.getStylesheets().add("sample/stylesheet.css");
@@ -94,34 +97,26 @@ public class LogInPage extends Application {
                                      "AND " + Datasource.COLUMN_PASSWORD + " = ?";
 
                     PreparedStatement st = conn.prepareStatement(sql);
-
                     st.setString(1, passedInUserName);
                     st.setString(2, passedInPassword);
 
                     ResultSet rs = st.executeQuery();
 
                     if (rs.next()) {
-                        System.out.print("Found user: ");
-                        System.out.println(rs.getString(3) + ", " + rs.getString(5));
-
                         Payment payment = new Payment();
                         payment.start(stage2);
+
                     } else {
                         lblErrorSignIn.setVisible(true);
                         System.out.println("User not found");
                     }
-
 
                 } catch (
                         SQLException e) {
                     System.out.println("Something went wrong: " + e.getMessage());
                     e.printStackTrace();
                 }
-
-
             }
         });
-
-
     }
 }

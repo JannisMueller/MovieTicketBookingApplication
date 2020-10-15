@@ -9,8 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.sql.Connection;
@@ -22,6 +20,7 @@ public class CreateAccount extends Application {
 
     public void start(Stage stage) {
 
+        // Header text
         Text tHeader = new Text("Create account");
         tHeader.setId("header-text");
 
@@ -59,15 +58,18 @@ public class CreateAccount extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
 
+                // Connect to db
                 try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
                      Statement statement = conn.createStatement()) {
 
+                    // Save customer data to Strings for easier readability
                     String firstname = tfFirstName.getText();
                     String lastname = tfLastName.getText();
                     String email = tfEmail.getText();
                     String phone = tfPhone.getText();
                     String password = pfPassword.getText();
 
+                    // Creates a position in the customer db
                     Datasource.createCustomer(statement, firstname, lastname, email, phone, password);
 
                 } catch (
@@ -76,23 +78,30 @@ public class CreateAccount extends Application {
                     e.printStackTrace();
                 }
 
-
+                // Alert pop-up notifying that account was created
                 Alert alertAccountCreated = new Alert(Alert.AlertType.INFORMATION);
                 alertAccountCreated.setTitle("Information Dialog");
                 alertAccountCreated.setHeaderText("Account created!");
                 alertAccountCreated.setContentText("Log in with your details on next page");
                 alertAccountCreated.showAndWait();
 
+                // Switch to log-in page
                 LogInPage logInPageStage = new LogInPage();
                 logInPageStage.start(stage);
 
             }
         });
         
-        // Action for Button Back
+        // Action for Button Bac
+        btnBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                LogInPage logInPageStage = new LogInPage();
+                logInPageStage.start(stage);
+            }
+        });
 
-
-
+        // Logo
         Image imageSF = new Image("file:src/sample/logoCompany.jpg");
         ImageView imageViewSF = new ImageView(imageSF);
         imageViewSF.setPreserveRatio(true);
@@ -105,6 +114,7 @@ public class CreateAccount extends Application {
         gridPane.setHgap(10);
         gridPane.setAlignment(Pos.TOP_CENTER);
 
+        // Adding objects to gridpane
         gridPane.add(imageViewSF, 3, 1);
 
         gridPane.add(tHeader, 1, 4, 2, 1);
@@ -126,8 +136,6 @@ public class CreateAccount extends Application {
 
         gridPane.add(btnCreateAccount, 2, 11);
         gridPane.add(btnBack, 2, 12);
-
-        
 
         Scene scene2 = new Scene(gridPane, 450, 500);
         scene2.getStylesheets().add("sample/stylesheet.css");

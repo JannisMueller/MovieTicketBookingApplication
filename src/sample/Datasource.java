@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 public class Datasource {
 
     // Columns for customer db
-
     public static final String DB_NAME = "customer.db";
     public static final String CONNECTION_STRING = "jdbc:sqlite:file:src\\" + DB_NAME;
     public static final String TABLE_CUSTOMER = "customer";
@@ -46,7 +45,7 @@ public class Datasource {
                     COLUMN_DATEMOVIE + " text, " +
                     COLUMN_NUMBER_TICKETS + " text, " +
                     COLUMN_SEATS+ " text, " +
-                    COLUMN_TOTAL_PRICE+ " text" +
+                    COLUMN_TOTAL_PRICE+ " integer" +
 
                     ")");
 
@@ -58,7 +57,7 @@ public class Datasource {
             e.printStackTrace();
         }
     }
-    public static void createBooking(Statement statement, String bookingId, String bookingTime, String movie, String date, String numberTickets, String seats, String totalPrice) throws SQLException {
+    public static void createBooking(Statement statement, String bookingId, String bookingTime, String movie, String date, String numberTickets, String seats, int totalPrice) throws SQLException {
         statement.execute("INSERT INTO " + TABLE_BOOKINGS +
                 " (" + COLUMN_BOOKING_ID+ ", " +
                 COLUMN_TIME_BOOKING + ", " +
@@ -68,7 +67,7 @@ public class Datasource {
                 COLUMN_SEATS+ " , " +
                 COLUMN_TOTAL_PRICE +
                 " ) " +
-                "VALUES('" + bookingId + "', '"+  bookingTime + "', '" +  movie + "', '" + date + "', '" + numberTickets + "', '" + seats + "', '" + totalPrice + "')");
+                "VALUES('" + bookingId + "', '"+  bookingTime + "', '" +  movie + "', '" + date + "', '" + numberTickets + "', '" + seats + "', " + totalPrice + ")");
     }
 
 

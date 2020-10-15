@@ -32,11 +32,9 @@ public class OrderConfirmation extends Application {
         String passedInUserName = LogInPage.tfEmail.getText();
 
         try {
-
             Connection conn = null;
             ResultSet result = null;
             PreparedStatement preparedStatements = null;
-
 
             // Connection to user db
             conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
@@ -52,6 +50,7 @@ public class OrderConfirmation extends Application {
             String phone = result.getString(Datasource.COLUMN_PHONE);
 
             preparedStatements.close();
+            result.close();
             conn.close();
 
             //connection to bookings db
@@ -65,6 +64,10 @@ public class OrderConfirmation extends Application {
             String resultNumberTickets = result.getString(Datasource.COLUMN_NUMBER_TICKETS);
             String resultSeats = result.getString(Datasource.COLUMN_SEATS);
             String resultTotalPrice= result.getString(Datasource.COLUMN_TOTAL_PRICE);
+
+            preparedStatements.close();
+            result.close();
+            conn.close();
 
 
             Text bookingInformation = new Text("Booking Details");
@@ -111,8 +114,6 @@ public class OrderConfirmation extends Application {
 
             Text info = new Text("Payment successful");
             info.setId("bold-text");
-            Text info2 = new Text("Tickets have been send to your E-mail");
-
 
             TextField emailFriend = new TextField();
             emailFriend.setPromptText("Email-Address");
@@ -169,7 +170,6 @@ public class OrderConfirmation extends Application {
             gridPane5.add(txtPhoneCustomer,2,14);
 
             gridPane5.add(info, 1, 5);
-//            gridPane5.add(info2, 1, 16);
 
             gridPane5.add(bntCloseWindow, 1, 22);
 
@@ -189,6 +189,7 @@ public class OrderConfirmation extends Application {
             stage5.show();
 
 
+            // BUtton -> Close application
             bntCloseWindow.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -196,12 +197,11 @@ public class OrderConfirmation extends Application {
                 }
             });
 
+            // Button -> Send ticket-info via e-mail (functionality not added)
             btnSend.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     emailSent.setText("Tickets sent to: " + emailFriend.getText());
-
-
                 }
             });
 
@@ -210,6 +210,5 @@ public class OrderConfirmation extends Application {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
 }
