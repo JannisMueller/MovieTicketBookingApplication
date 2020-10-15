@@ -25,8 +25,7 @@ public class LogInPage extends Application {
     public void start(Stage stage2) {
 
         Text txtLogin = new Text("Sign In");
-        txtLogin.setStyle("-fx-font-weight: bold");
-        txtLogin.setStyle("-fx-font: 20 arial;");
+        txtLogin.setId("header-text");
 
         Text notACustomer = new Text("Not a customer yet? Register now!");
 
@@ -50,22 +49,23 @@ public class LogInPage extends Application {
 
 
         GridPane gridPane2 = new GridPane();
-        gridPane2.setVgap(5);
-        gridPane2.setHgap(5);
-        gridPane2.setAlignment(Pos.TOP_CENTER);
+        gridPane2.setVgap(10);
+        gridPane2.setHgap(10);
+        gridPane2.setAlignment(Pos.CENTER);
 
-        gridPane2.add(txtLogin, 1, 3);
-        gridPane2.add(imageViewSF, 3, 1);
+        gridPane2.add(txtLogin, 1, 3, 2, 1);
+//        gridPane2.add(imageViewSF, 3, 1);
         gridPane2.add(tfEmail, 1, 4);
         gridPane2.add(pfPassword, 2, 4);
         gridPane2.add(bntLogIn, 1, 6);
         gridPane2.add(lblErrorSignIn, 2, 6);
-        gridPane2.add(notACustomer, 1, 12, 2, 1);
-        gridPane2.add(bntCreateAccount, 1, 13);
+        gridPane2.add(notACustomer, 1, 9, 2, 1);
+        gridPane2.add(bntCreateAccount, 1, 10);
 
 
         stage2.setTitle("Log-in");
-        Scene scene2 = new Scene(gridPane2, 400, 400);
+        Scene scene2 = new Scene(gridPane2, 450, 320);
+        scene2.getStylesheets().add("sample/stylesheet.css");
         stage2.setScene(scene2);
         stage2.show();
 
@@ -124,8 +124,4 @@ public class LogInPage extends Application {
 
 
     }
-//    private void checkUserCredentials(String userEmail) {
-//
-//
-//    }
 }

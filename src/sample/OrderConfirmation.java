@@ -31,7 +31,6 @@ public class OrderConfirmation extends Application {
 
         String passedInUserName = LogInPage.tfEmail.getText();
 
-
         try {
 
             Connection conn = null;
@@ -69,49 +68,49 @@ public class OrderConfirmation extends Application {
 
 
             Text bookingInformation = new Text("Booking Details");
-
-            bookingInformation.setStyle("-fx-font-weight: bold");
-            bookingInformation.setStyle("-fx-font: 20 arial;");
+            bookingInformation.setId("header-text");
 
             Label bookingId = new Label("Booking number");
-            bookingId.setStyle("-fx-font-weight: bold");
             Text txtBookingId = new Text(resultBookingId);
+            bookingId.setId("bold-text");
 
             Label nameFilm = new Label("Movie");
-            nameFilm.setStyle("-fx-font-weight: bold");
             Text txtNameFilm = new Text(resultMovie);
+            nameFilm.setId("bold-text");
 
             Label date = new Label("Date");
-            date.setStyle("-fx-font-weight: bold");
             Text txtDate = new Text(resultDate);
+            date.setId("bold-text");
 
             Label numberTickets = new Label("Number of Tickets");
-            numberTickets.setStyle("-fx-font-weight: bold");
             Text txtNumberTickets = new Text(resultNumberTickets);
+            numberTickets.setId("bold-text");
 
             Label seat = new Label("Seat");
-            seat.setStyle("-fx-font-weight: bold");
             Text txtSeat = new Text(resultSeats);
+            seat.setId("bold-text");
 
             Label totalPrice = new Label("Total Price");
-            seat.setStyle("-fx-font-weight: bold");
-            Text txtTotalPrice = new Text(resultTotalPrice);
+            Text txtTotalPrice = new Text(resultTotalPrice + " €");
+            totalPrice.setId("bold-text");
 
             Label nameCustomer = new Label("Name");
             nameCustomer.setStyle("-fx-font-weight: bold");
             Text txtNameCustomer = new Text(firstName + " " + lastName);
+            nameCustomer.setId("bold-text");
 
             Label emailCustomer = new Label("Email-Address");
-            emailCustomer.setStyle("-fx-font-weight: bold");
             Text txtEmailCustomer = new Text(email);
+            emailCustomer.setId("bold-text");
 
             Label phoneCustomer = new Label("Phone Number");
-            phoneCustomer.setStyle("-fx-font-weight: bold");
             Text txtPhoneCustomer = new Text(phone);
+            phoneCustomer.setId("bold-text");
 
-            Text sendAsEmail = new Text("Send tickets to a friend");
+            Text sendAsEmail = new Text("Send tickets to a friend?");
 
             Text info = new Text("Payment successful");
+            info.setId("bold-text");
             Text info2 = new Text("Tickets have been send to your E-mail");
 
 
@@ -170,14 +169,14 @@ public class OrderConfirmation extends Application {
             gridPane5.add(txtPhoneCustomer,2,14);
 
             gridPane5.add(info, 1, 5);
-            gridPane5.add(info2, 1, 16);
+//            gridPane5.add(info2, 1, 16);
 
-            gridPane5.add(bntCloseWindow, 1, 17);
+            gridPane5.add(bntCloseWindow, 1, 22);
 
-            gridPane5.add(sendAsEmail, 1, 21);
-            gridPane5.add(emailFriend, 1, 22);
-            gridPane5.add(btnSend, 2, 22);
-            gridPane5.add(emailSent, 1, 23);
+            gridPane5.add(sendAsEmail, 1, 17);
+            gridPane5.add(emailFriend, 1, 18);
+            gridPane5.add(btnSend, 1, 19);
+            gridPane5.add(emailSent, 1, 20);
 
             gridPane5.add(imageViewPaymentSuccess, 2, 5);
 
@@ -185,6 +184,7 @@ public class OrderConfirmation extends Application {
 
             stage5.setTitle("Thank you for Order!");
             Scene scene5 = new Scene(gridPane5, 500, 650);
+            scene5.getStylesheets().add("sample/stylesheet.css");
             stage5.setScene(scene5);
             stage5.show();
 

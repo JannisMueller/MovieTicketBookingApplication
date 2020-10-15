@@ -20,7 +20,6 @@ public class Payment extends Application {
     @Override
     public void start(Stage stage4) {
 
-
         //DropDown menu for payment options
         ObservableList<String> options =
                 FXCollections.observableArrayList(
@@ -53,7 +52,7 @@ public class Payment extends Application {
         Label lbCVV = new Label("CVV");
 
         Text tInfo = new Text("©CinemaTix AB, 23143 Jönköping");
-        tInfo.setStyle("-fx-font-size: 60%");
+        tInfo.setId("footer");
 
         Image imageCC = new Image("file:src/sample/visacard.png");
         ImageView imageViewCC = new ImageView(imageCC);
@@ -92,6 +91,7 @@ public class Payment extends Application {
 
         stage4.setTitle("Payment");
         Scene scene4 = new Scene(gridPane4, 400, 400);
+        scene4.getStylesheets().add("sample/stylesheet.css");
         stage4.setScene(scene4);
         stage4.show();
 

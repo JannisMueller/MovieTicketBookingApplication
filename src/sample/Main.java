@@ -15,7 +15,7 @@ public class Main extends Application {
         launch(args);
     }
 
-     @Override
+    @Override
     public void start(Stage stage) throws Exception {
 
         SelectMovie selectMovieStage = new SelectMovie();

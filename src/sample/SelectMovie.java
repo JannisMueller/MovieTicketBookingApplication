@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -36,23 +33,25 @@ public class SelectMovie extends Application {
 
         // Header text
         Text tHeader = new Text("Get Tickets");
-        tHeader.setFont(Font.font("", FontWeight.BOLD, 20));
+        tHeader.setId("header-text");
 
         // Seperator
         Separator separator1 = new Separator();
 
+        // Label Price
+        Label lblPrice = new Label("9 €");
+
         //Select Date
         DatePicker datePicker = new DatePicker();
-
         Text tDatePicker = new Text("Date: ");
 
         // Select movie
         Text tMovie = new Text("Select movie: ");
         ObservableList<String> optionsMovies =
                 FXCollections.observableArrayList(
-                        "Batman",
-                        "Goodfellas",
-                        "Beck"
+                        "Batman (9€)",
+                        "Goodfellas (9€)",
+                        "Beck (9€)"
                 );
         ComboBox cbMovie = new ComboBox(optionsMovies);
         cbMovie.setPromptText("Select Movie");
@@ -101,7 +100,8 @@ public class SelectMovie extends Application {
 
 
         // Creating stage etc
-        Scene scene1 = new Scene(gridPane1, 400,500);
+        Scene scene1 = new Scene(gridPane1, 450, 500);
+        scene1.getStylesheets().add("sample/stylesheet.css");
         stage.setScene(scene1);
         stage.show();
 
@@ -119,9 +119,9 @@ public class SelectMovie extends Application {
                     String bookingId = String.valueOf("RX-" + (int) (1 + Math.random() * 9999));
                     String movie = (String) cbMovie.getValue();
                     String date = String.valueOf(datePicker.getValue());
-                    String numberTickets = (String) cbTickets.getValue();
-                    String seats = "Row 9, Seat 19-20";
-                    String totalPrice = "30";
+                    String numberTickets = (String) (cbTickets.getValue());
+                    String seats = "Free choice of seats";
+                    int totalPrice = Integer.parseInt((String) cbTickets.getValue()) * 9;
 
                     Datasource.createBooking(statement, bookingId, bookingTime, movie, date, numberTickets, seats, totalPrice);
 
