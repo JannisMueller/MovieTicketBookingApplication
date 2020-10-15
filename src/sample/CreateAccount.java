@@ -11,12 +11,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 
 public class CreateAccount extends Application {
 
@@ -29,7 +27,6 @@ public class CreateAccount extends Application {
         Label lblFirstName = new Label("First name: ");
         TextField tfFirstName = new TextField();
         tfFirstName.setPromptText("First name");
-
 
         // Last name
         Label lblLastName = new Label("Last name");
@@ -49,7 +46,6 @@ public class CreateAccount extends Application {
         // Buttons
         Button btnCreateAccount = new Button("Create Account");
         Button btnBack = new Button("Back");
-
 
         // Password
         Label lblPassword = new Label("Password: ");
@@ -80,8 +76,6 @@ public class CreateAccount extends Application {
 
         gridPane.add(btnCreateAccount, 1, 6);
         gridPane.add(btnBack, 0, 6);
-
-
 
         btnCreateAccount.setOnAction(new EventHandler<ActionEvent>() {
 

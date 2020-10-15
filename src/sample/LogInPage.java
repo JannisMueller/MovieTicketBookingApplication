@@ -24,7 +24,6 @@ public class LogInPage extends Application {
     @Override
     public void start(Stage stage2) {
 
-
         Text txtLogin = new Text("Sign In");
         txtLogin.setStyle("-fx-font-weight: bold");
         txtLogin.setStyle("-fx-font: 20 arial;");
@@ -87,53 +86,26 @@ public class LogInPage extends Application {
                 String passedInUserName = tfEmail.getText();
                 String passedInPassword = pfPassword.getText();
 
-                System.out.println("Passed in username: " + passedInUserName);
-                System.out.println("Passed in password: " + passedInPassword);
-
                 try {
-
-                    Connection conn = null;
-                    PreparedStatement st = null;
-                    ResultSet rs = null;
-
-                    conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
+                    Connection conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
 
                     String sql =     "SELECT * FROM " + Datasource.TABLE_CUSTOMER + " " +
                                      "WHERE " + Datasource.COLUMN_EMAIL + " = ? " +
                                      "AND " + Datasource.COLUMN_PASSWORD + " = ?";
 
-                    st = conn.prepareStatement(sql);
+                    PreparedStatement st = conn.prepareStatement(sql);
 
                     st.setString(1, passedInUserName);
                     st.setString(2, passedInPassword);
 
-                    rs = st.executeQuery();
+                    ResultSet rs = st.executeQuery();
 
+                    if (rs.next()) {
+                        System.out.print("Found user: ");
+                        System.out.println(rs.getString(3) + ", " + rs.getString(5));
 
-//                ResultSet resultEmail = statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_EMAIL + "='" + tfEmail.getText() + "'");
-//                ResultSet resultPassword = statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_PASSWORD + "='" + pfPassword.getText() + "'");
-//
-//                String email = resultEmail.getString(Datasource.COLUMN_EMAIL);
-//                System.out.println("Email in database: " + email);
-//
-//                String password = resultPassword.getString(Datasource.COLUMN_PASSWORD);
-//                System.out.println("Password in database : " + password);
-//
-//                if (tfEmail.getText().equalsIgnoreCase(email) && pfPassword.getText().equalsIgnoreCase(password)) {
-
-
-                    if (rs != null) {
-                        while(rs.next()) {
-                            System.out.print("Found user: ");
-                            System.out.println(rs.getString(3) + ", " + rs.getString(4));
-                        }
-
-
-
-
-//                        Payment payment = new Payment();
-//                        payment.start(stage2);
-
+                        Payment payment = new Payment();
+                        payment.start(stage2);
                     } else {
                         lblErrorSignIn.setVisible(true);
                         System.out.println("User not found");
