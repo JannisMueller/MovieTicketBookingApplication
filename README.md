@@ -14,7 +14,7 @@ The project includes the following files:
 2. Customer class: to save and handle all customer-related data
 
 3. Datasource class: two SQLlite database to save account information (name, emails, etc.) and booking details (Booking-ID, name of selected movie, total price, etc.)
-  ![alt text](https://github.com/JannisMueller/Disaster-Response-Pipeline/blob/master/disaster_app_screenshot.png)
+  ![alt text](https://github.com/JannisMueller/MovieTicketBookingApplication/blob/master/Stage%201.png)
 
 4. SelectMovie class (Stage 1): where the user chooses the movie they would like to watch, the date and number of tickets
 
