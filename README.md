@@ -1,6 +1,6 @@
 # MovieTicketBookingApplication
 
-##  Desktop Application (JavaFX) for booking movies tickets.
+##  Desktop Application (JavaFX) for booking movies tickets
 
 ## General Information
 We built an application in JavaFX where the user can book movie tickets
