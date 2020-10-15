@@ -14,17 +14,26 @@ The project includes the following files:
 2. Customer class: to save and handle all customer-related data
 
 3. Datasource class: two SQLlite database to save account information (name, emails, etc.) and booking details (Booking-ID, name of selected movie, total price, etc.)
-  ![alt text](https://github.com/JannisMueller/MovieTicketBookingApplication/blob/master/Stage%201.png)
 
 4. SelectMovie class (Stage 1): where the user chooses the movie they would like to watch, the date and number of tickets
 
+ ![alt text](https://github.com/JannisMueller/MovieTicketBookingApplication/blob/master/Stage%201.png)
+
 5. LogInPage class (Stage 2): where the user is asked to sign in to continue the check out
+
+![alt text](https://github.com/JannisMueller/MovieTicketBookingApplication/blob/master/Stage%202.png)
 
 6. CreateAccount class (Stage 3): if the user is not a customer yet, they needs to create an account 
 
+![alt text](https://github.com/JannisMueller/MovieTicketBookingApplication/blob/master/Stage%203.png)
+
 7. Payment class (Stage 4): after sign in, the user is ask to fill in their payment information (only credit card payment) and finalize the payment
 
+![alt text](https://github.com/JannisMueller/MovieTicketBookingApplication/blob/master/Stage%204.png)
+
 8. OrderConfirmation class (Stage 5): after the payment, the customer gets an overview over their order
+
+![alt text](https://github.com/JannisMueller/MovieTicketBookingApplication/blob/master/Stage%205.png)
 
 
 
