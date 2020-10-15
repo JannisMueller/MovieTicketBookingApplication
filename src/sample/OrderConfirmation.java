@@ -21,14 +21,51 @@ public class OrderConfirmation extends Application {
     @Override
     public void start(Stage stage5) {
 
-        try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
-             Statement statement = conn.createStatement()) {
-            ResultSet result= statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_EMAIL + "='" + LogInPage.tfEmail.getText() + "'");
+        String sql =     "SELECT * FROM " + Datasource.TABLE_CUSTOMER + " " +
+                        "WHERE " + Datasource.COLUMN_EMAIL + " = ? ";
+
+        String sql2 = "SELECT * FROM " + Datasource.TABLE_BOOKINGS+ " " +
+                    "ORDER BY " + Datasource.COLUMN_BOOKING_ID + " " +
+                    " ASC LIMIT 1";
+
+        String passedInUserName = LogInPage.tfEmail.getText();
+
+
+        try {
+
+            Connection conn = null;
+            ResultSet result = null;
+            PreparedStatement preparedStatements = null;
+
+
+            // Connection to user db
+            conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
+            preparedStatements = conn.prepareStatement(sql);
+
+            preparedStatements.setString(1,passedInUserName);
+
+            result= preparedStatements.executeQuery();
 
             String firstName = result.getString(Datasource.COLUMN_FIRSTNAME);
             String lastName = result.getString(Datasource.COLUMN_LASTNAME);
             String email = result.getString(Datasource.COLUMN_EMAIL);
             String phone = result.getString(Datasource.COLUMN_PHONE);
+
+            preparedStatements.close();
+            conn.close();
+
+            //connection to bookings db
+            conn = DriverManager.getConnection(Datasource.CONNECTION_BOOKING_STRING);
+            preparedStatements = conn.prepareStatement(sql2);
+            result= preparedStatements.executeQuery();
+
+            String resultBookingId = result.getString(Datasource.COLUMN_BOOKING_ID);
+            String resultMovie = result.getString(Datasource.COLUMN_MOVIE);
+            String resultDate = result.getString(Datasource.COLUMN_DATEMOVIE);
+            String resultNumberTickets = result.getString(Datasource.COLUMN_NUMBER_TICKETS);
+            String resultSeats = result.getString(Datasource.COLUMN_SEATS);
+            String resultTotalPrice= result.getString(Datasource.COLUMN_TOTAL_PRICE);
+
 
 
             Text bookingInformation = new Text("Booking Details");
@@ -38,28 +75,27 @@ public class OrderConfirmation extends Application {
 
             Label bookingId = new Label("Booking number");
             bookingId.setStyle("-fx-font-weight: bold");
-            Text txtBookingId = new Text("T12345");
+            Text txtBookingId = new Text(resultBookingId);
 
             Label nameFilm = new Label("Movie");
             nameFilm.setStyle("-fx-font-weight: bold");
-
-            Text txtnameFilm = new Text("Tennet");
+            Text txtNameFilm = new Text(resultMovie);
 
             Label date = new Label("Date");
             date.setStyle("-fx-font-weight: bold");
-            Text txtDate = new Text("21/10/2020");
+            Text txtDate = new Text(resultDate);
 
             Label numberTickets = new Label("Number of Tickets");
             numberTickets.setStyle("-fx-font-weight: bold");
-            Text txtNumberTickets = new Text("2");
+            Text txtNumberTickets = new Text(resultNumberTickets);
 
             Label seat = new Label("Seat");
             seat.setStyle("-fx-font-weight: bold");
-            Text txtSeat = new Text("Row 9, Seat 19-20");
+            Text txtSeat = new Text(resultSeats);
 
             Label totalPrice = new Label("Total Price");
             seat.setStyle("-fx-font-weight: bold");
-            Text txtTotalPrice = new Text("$ 30.00");
+            Text txtTotalPrice = new Text(resultTotalPrice);
 
             Label nameCustomer = new Label("Name");
             nameCustomer.setStyle("-fx-font-weight: bold");
@@ -110,7 +146,7 @@ public class OrderConfirmation extends Application {
             gridPane5.add(txtBookingId, 2, 6);
 
             gridPane5.add(nameFilm, 1, 7);
-            gridPane5.add(txtnameFilm, 2, 7);
+            gridPane5.add(txtNameFilm, 2, 7);
 
             gridPane5.add(date, 1, 8);
             gridPane5.add(txtDate, 2, 8);

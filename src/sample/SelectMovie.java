@@ -29,8 +29,8 @@ public class SelectMovie extends Application {
 
     public void start(Stage stage) {
 
-        int max = 1000;
-        int min = 1999;
+        int max = 1999;
+        int min = 1000;
         int range = max - min + 1;
 
         // Header text
@@ -98,6 +98,7 @@ public class SelectMovie extends Application {
         gridPane1.add(btNext,1,9);
         gridPane1.add(imageViewSF,3,1);
 
+
         // Creating stage etc
         Scene scene1 = new Scene(gridPane1, 400,500);
         stage.setScene(scene1);
@@ -112,7 +113,9 @@ public class SelectMovie extends Application {
                 try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_BOOKING_STRING);
                      Statement statement = conn.createStatement()) {
 
-                    String bookingId = String.valueOf(Math.random() * range + min);
+                    int index = 0;
+
+                    String bookingId = String.valueOf(index+1);
                     String movie = (String) cbMovie.getValue();
                     String date = String.valueOf(datePicker.getValue());
                     String numberTickets = (String) cbTickets.getValue();
@@ -120,7 +123,6 @@ public class SelectMovie extends Application {
                     String totalPrice = "30";
 
                     Datasource.createBooking(statement, bookingId, movie, date, numberTickets, seats, totalPrice);
-
 
                 } catch (
                         SQLException e) {
@@ -132,10 +134,7 @@ public class SelectMovie extends Application {
                 stage.close();
                 LogInPage logInPage = new LogInPage();
                 logInPage.start(stage);
-
             }});
-
-
 
     }
 }

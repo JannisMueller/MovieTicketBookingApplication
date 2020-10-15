@@ -41,6 +41,7 @@ public class Datasource {
              Statement statement = conn.createStatement()) {
 
             statement.execute("CREATE TABLE IF NOT EXISTS " + Datasource.TABLE_BOOKINGS +
+
                     " (" + COLUMN_BOOKING_ID + " text, " +
                     COLUMN_MOVIE + " text, " +
                     COLUMN_DATEMOVIE + " text, " +
@@ -58,7 +59,6 @@ public class Datasource {
         }
     }
     public static void createBooking(Statement statement, String bookingId, String movie, String date, String numberTickets, String seats, String totalPrice) throws SQLException {
-
         statement.execute("INSERT INTO " + TABLE_BOOKINGS +
                 " (" + COLUMN_BOOKING_ID+ ", " +
                 COLUMN_MOVIE + ", " +
