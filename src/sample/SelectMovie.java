@@ -11,14 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.Random;
 
 public class SelectMovie extends Application {
 
@@ -34,9 +30,6 @@ public class SelectMovie extends Application {
 
         // Seperator
         Separator separator1 = new Separator();
-
-        // Label Price
-        Label lblPrice = new Label("9 €");
 
         //Select Date
         DatePicker datePicker = new DatePicker();
@@ -111,9 +104,7 @@ public class SelectMovie extends Application {
                 try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_BOOKING_STRING);
                      Statement statement = conn.createStatement()) {
 
-                    int index = 0;
-
-                    String bookingId = String.valueOf("RX-" + (int) (1 + Math.random() * 9999));
+                    String bookingId = "RX-" + (int) (1 + Math.random() * 9999);
                     String movie = (String) cbMovie.getValue();
                     String date = String.valueOf(datePicker.getValue());
                     String numberTickets = (String) (cbTickets.getValue());
