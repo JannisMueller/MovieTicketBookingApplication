@@ -12,7 +12,6 @@ public class Main extends Application {
         Datasource.createCustomerDatabase();
         Datasource.createBookingsDatabase();
 
-
         launch(args);
     }
 

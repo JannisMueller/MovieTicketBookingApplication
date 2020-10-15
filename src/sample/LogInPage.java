@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,6 +23,7 @@ public class LogInPage extends Application {
 
     @Override
     public void start(Stage stage2) {
+
 
         Text txtLogin = new Text("Sign In");
         txtLogin.setStyle("-fx-font-weight: bold");
@@ -77,39 +80,76 @@ public class LogInPage extends Application {
 
         // Button -> Log in
         // Tests if account exists in database
-        bntLogIn.setOnAction(actionEvent -> {
+        bntLogIn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
 
-            try (Connection conn = DriverManager.getConnection(Datasource.CONNECTION_STRING); Statement statement = conn.createStatement()) {
+                String passedInUserName = tfEmail.getText();
+                String passedInPassword = pfPassword.getText();
 
-                ResultSet resultEmail = statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_EMAIL + "='" + tfEmail.getText() + "'");
-                ResultSet resultPassword = statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_PASSWORD + "='" + pfPassword.getText() + "'");
+                System.out.println("Passed in username: " + passedInUserName);
+                System.out.println("Passed in password: " + passedInPassword);
 
-                String email = resultEmail.getString(Datasource.COLUMN_EMAIL);
-                System.out.println("Email in database: " + email);
+                try {
 
-                String password = resultPassword.getString(Datasource.COLUMN_PASSWORD);
-                System.out.println("Password in database : " + password);
+                    Connection conn = null;
+                    PreparedStatement st = null;
+                    ResultSet rs = null;
 
-                if (tfEmail.getText().equalsIgnoreCase(email) && pfPassword.getText().equalsIgnoreCase(password)) {
+                    conn = DriverManager.getConnection(Datasource.CONNECTION_STRING);
 
-                    System.out.println("Welcome!");
+                    String sql =     "SELECT * FROM " + Datasource.TABLE_CUSTOMER + " " +
+                                     "WHERE " + Datasource.COLUMN_EMAIL + " = ? " +
+                                     "AND " + Datasource.COLUMN_PASSWORD + " = ?";
 
-                    Payment payment = new Payment();
-                    payment.start(stage2);
+                    st = conn.prepareStatement(sql);
 
-                } else {
-                    lblErrorSignIn.setVisible(true);
+                    st.setString(1, passedInUserName);
+                    st.setString(2, passedInPassword);
+
+                    rs = st.executeQuery();
+
+
+//                ResultSet resultEmail = statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_EMAIL + "='" + tfEmail.getText() + "'");
+//                ResultSet resultPassword = statement.executeQuery("SELECT * FROM " + Datasource.TABLE_CUSTOMER + " WHERE " + Datasource.COLUMN_PASSWORD + "='" + pfPassword.getText() + "'");
+//
+//                String email = resultEmail.getString(Datasource.COLUMN_EMAIL);
+//                System.out.println("Email in database: " + email);
+//
+//                String password = resultPassword.getString(Datasource.COLUMN_PASSWORD);
+//                System.out.println("Password in database : " + password);
+//
+//                if (tfEmail.getText().equalsIgnoreCase(email) && pfPassword.getText().equalsIgnoreCase(password)) {
+
+
+                    if (rs != null) {
+                        while(rs.next()) {
+                            System.out.print("Found user: ");
+                            System.out.println(rs.getString(3) + ", " + rs.getString(4));
+                        }
+
+
+
+
+//                        Payment payment = new Payment();
+//                        payment.start(stage2);
+
+                    } else {
+                        lblErrorSignIn.setVisible(true);
+                        System.out.println("User not found");
+                    }
+
+
+                } catch (
+                        SQLException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                    e.printStackTrace();
                 }
 
 
-            } catch (
-                    SQLException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
-                e.printStackTrace();
             }
-
-
         });
+
 
     }
 //    private void checkUserCredentials(String userEmail) {
